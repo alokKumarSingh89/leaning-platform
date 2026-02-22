@@ -79,8 +79,8 @@ export default async function NotePage({ params }: NotePageProps) {
         Updated {note.updatedAt.toLocaleDateString()}
       </p>
 
-      <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 shadow-xl shadow-black/20">
-        <NoteContent content={note.content} />
+      <div className="rounded-xl backdrop-blur-sm p-6">
+        <NoteContent content={note.content} type={note.type} />
       </div>
     </div>
   );

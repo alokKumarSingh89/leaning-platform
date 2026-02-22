@@ -9,8 +9,31 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+function extractTextFromContent(raw: string): string {
+  try {
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed)) {
+      return parsed
+        .map((s) => [s.heading ?? "", s.body ?? ""].filter(Boolean).join(" "))
+        .join(" ");
+    }
+    if (parsed?.answer) {
+      const fuText = (parsed.followUps ?? [])
+        .map((f: { question?: string; answer?: string }) =>
+          [f.question, f.answer].filter(Boolean).join(" "),
+        )
+        .join(" ");
+      return [parsed.answer, fuText].filter(Boolean).join(" ");
+    }
+  } catch {
+    /* not JSON */
+  }
+  return raw;
+}
+
 function stripMarkdown(raw: string): string {
-  return raw
+  const text = extractTextFromContent(raw);
+  return text
     .replace(/```[\s\S]*?```/g, "") // fenced code blocks
     .replace(/`([^`]+)`/g, "$1") // inline code
     .replace(/^#{1,6}\s+/gm, "") // headings
