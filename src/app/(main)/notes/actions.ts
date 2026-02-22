@@ -16,17 +16,22 @@ export async function createNote(
 
   const title = formData.get("title") as string;
   const content = formData.get("content") as string;
+  const type = (formData.get("type") as string) || "note";
   const tagIds = formData.getAll("tagIds") as string[];
 
   if (!title?.trim()) {
     return { error: "Title is required" };
   }
 
+  const noteType =
+    type === "interview" ? "interview" : ("note" as "note" | "interview");
+
   const [note] = await db
     .insert(notes)
     .values({
       title: title.trim(),
       content: content || "",
+      type: noteType,
       userId: session.user.id,
     })
     .returning();
@@ -51,11 +56,15 @@ export async function updateNote(
 
   const title = formData.get("title") as string;
   const content = formData.get("content") as string;
+  const type = (formData.get("type") as string) || "note";
   const tagIds = formData.getAll("tagIds") as string[];
 
   if (!title?.trim()) {
     return { error: "Title is required" };
   }
+
+  const noteType =
+    type === "interview" ? "interview" : ("note" as "note" | "interview");
 
   const [existing] = await db
     .select()
@@ -67,7 +76,7 @@ export async function updateNote(
 
   await db
     .update(notes)
-    .set({ title: title.trim(), content, updatedAt: new Date() })
+    .set({ title: title.trim(), content, type: noteType, updatedAt: new Date() })
     .where(eq(notes.id, noteId));
 
   await db.delete(noteTags).where(eq(noteTags.noteId, noteId));

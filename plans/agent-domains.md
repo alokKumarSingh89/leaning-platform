@@ -23,7 +23,7 @@ Authentication, authorization, session management, and route protection.
 
 ### Owned Files
 - `src/lib/auth.ts` — NextAuth config (GitHub OAuth + Credentials, DrizzleAdapter, JWT callbacks)
-- `src/middleware.ts` — Route protection (`/notes/new`, `*/edit` require auth; auth pages redirect logged-in users)
+- `src/proxy.ts` — Route protection (`/notes/new`, `*/edit` require auth; auth pages redirect logged-in users)
 - `src/app/api/auth/[...nextauth]/route.ts` — Auth.js HTTP handlers
 - `src/types/next-auth.d.ts` — Session type augmentation (`session.user.id`)
 - `src/db/schema/auth.ts` — Auth tables: users, accounts, sessions, verificationTokens *(shared with Server/DB)*
@@ -41,7 +41,7 @@ Authentication, authorization, session management, and route protection.
 
 ### Common Tasks
 - Add new OAuth provider: add to `providers[]` in `src/lib/auth.ts`, add env vars, add button to login page
-- Change protected routes: edit conditions in `src/middleware.ts`
+- Change protected routes: edit conditions in `src/proxy.ts`
 - Modify session data: update `jwt`/`session` callbacks + `next-auth.d.ts`
 
 ### Exports to Other Domains

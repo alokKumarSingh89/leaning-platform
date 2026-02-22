@@ -13,6 +13,7 @@ export const notes = pgTable("note", {
   id: uuid("id").defaultRandom().primaryKey(),
   title: text("title").notNull(),
   content: text("content").notNull().default(""),
+  type: text("type").notNull().default("note"),
   userId: text("user_id")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),

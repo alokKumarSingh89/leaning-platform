@@ -34,7 +34,14 @@ export default async function EditNotePage({ params }: EditNotePageProps) {
         </Link>
       </div>
       <h1 className="text-3xl font-bold text-slate-100 mb-8">Edit Note</h1>
-      <NoteForm tags={tags} initialData={note} action={boundUpdateNote} />
+      <NoteForm
+        tags={tags}
+        initialData={{
+          ...note,
+          type: (note.type as "note" | "interview") ?? "note",
+        }}
+        action={boundUpdateNote}
+      />
     </div>
   );
 }

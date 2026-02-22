@@ -19,6 +19,7 @@ interface Tag {
 interface NoteData {
   title: string;
   content: string;
+  type?: "note" | "interview";
   tags: Tag[];
 }
 
@@ -42,6 +43,9 @@ export function NoteForm({
   const [newTagName, setNewTagName] = useState("");
   const [content, setContent] = useState(initialData?.content || "");
   const [showPreview, setShowPreview] = useState(false);
+  const [noteType, setNoteType] = useState<"note" | "interview">(
+    initialData?.type || "note",
+  );
 
   function toggleTag(tagId: string) {
     setSelectedTagIds((prev) => {
@@ -125,6 +129,35 @@ export function NoteForm({
         )}
 
         {showPreview && <input type="hidden" name="content" value={content} />}
+      </div>
+
+      <div className="space-y-2">
+        <Label className="text-slate-300">Type</Label>
+        <div className="flex gap-2">
+          <button
+            type="button"
+            onClick={() => setNoteType("note")}
+            className={`px-4 py-1.5 rounded-md text-sm font-medium border transition-colors ${
+              noteType === "note"
+                ? "bg-blue-600 text-white border-blue-500"
+                : "bg-slate-900/50 text-slate-400 border-white/10 hover:bg-white/5"
+            }`}
+          >
+            Note
+          </button>
+          <button
+            type="button"
+            onClick={() => setNoteType("interview")}
+            className={`px-4 py-1.5 rounded-md text-sm font-medium border transition-colors ${
+              noteType === "interview"
+                ? "bg-green-700 text-white border-green-600"
+                : "bg-slate-900/50 text-slate-400 border-white/10 hover:bg-white/5"
+            }`}
+          >
+            Interview Question
+          </button>
+        </div>
+        <input type="hidden" name="type" value={noteType} />
       </div>
 
       <div className="space-y-3">
