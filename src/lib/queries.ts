@@ -126,6 +126,82 @@ export async function getNoteTagsForNotes(noteIds: string[]) {
   );
 }
 
+export async function getAllPublicNotes(tagId?: string, searchQuery?: string) {
+  if (tagId) {
+    return db
+      .select({
+        id: notes.id,
+        title: notes.title,
+        content: notes.content,
+        type: notes.type,
+        userId: notes.userId,
+        createdAt: notes.createdAt,
+        updatedAt: notes.updatedAt,
+      })
+      .from(notes)
+      .innerJoin(noteTags, eq(notes.id, noteTags.noteId))
+      .innerJoin(tags, eq(noteTags.tagId, tags.id))
+      .where(eq(tags.id, tagId))
+      .orderBy(desc(notes.updatedAt));
+  }
+
+  if (searchQuery) {
+    const pattern = `%${searchQuery}%`;
+    return db
+      .select({
+        id: notes.id,
+        title: notes.title,
+        content: notes.content,
+        type: notes.type,
+        userId: notes.userId,
+        createdAt: notes.createdAt,
+        updatedAt: notes.updatedAt,
+      })
+      .from(notes)
+      .where(or(ilike(notes.title, pattern), ilike(notes.content, pattern)))
+      .orderBy(desc(notes.updatedAt));
+  }
+
+  return db
+    .select({
+      id: notes.id,
+      title: notes.title,
+      content: notes.content,
+      type: notes.type,
+      userId: notes.userId,
+      createdAt: notes.createdAt,
+      updatedAt: notes.updatedAt,
+    })
+    .from(notes)
+    .orderBy(desc(notes.updatedAt));
+}
+
+export async function getPublicNoteById(noteId: string) {
+  const [note] = await db
+    .select({
+      id: notes.id,
+      title: notes.title,
+      content: notes.content,
+      type: notes.type,
+      userId: notes.userId,
+      createdAt: notes.createdAt,
+      updatedAt: notes.updatedAt,
+    })
+    .from(notes)
+    .where(eq(notes.id, noteId))
+    .limit(1);
+
+  if (!note) return null;
+
+  const noteTags_ = await db
+    .select({ id: tags.id, name: tags.name })
+    .from(noteTags)
+    .innerJoin(tags, eq(noteTags.tagId, tags.id))
+    .where(eq(noteTags.noteId, noteId));
+
+  return { ...note, tags: noteTags_ };
+}
+
 export async function getNoteById(noteId: string) {
   const session = await auth();
   if (!session?.user?.id) return null;

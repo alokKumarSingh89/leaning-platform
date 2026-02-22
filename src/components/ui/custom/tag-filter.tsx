@@ -32,14 +32,21 @@ export function TagFilter({
   if (tags.length === 0) return null;
 
   return (
-    <div className="flex flex-wrap gap-2 mb-6">
-      <button type="button" onClick={() => handleTagClick()}>
+    <div className="flex flex-col gap-1">
+      <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2 px-1">
+        Filter by Tag
+      </p>
+      <button
+        type="button"
+        className="w-full text-left"
+        onClick={() => handleTagClick()}
+      >
         <Badge
           variant={!activeTagId ? "default" : "secondary"}
           className={
             !activeTagId
-              ? "bg-blue-600 text-white hover:bg-blue-500 border border-blue-500 shadow-sm shadow-blue-500/30 cursor-pointer"
-              : "bg-blue-500/10 text-blue-300 border border-blue-500/20 hover:bg-blue-500/20 cursor-pointer"
+              ? "w-full justify-start bg-blue-600 text-white hover:bg-blue-500 border border-blue-500 shadow-sm shadow-blue-500/30 cursor-pointer"
+              : "w-full justify-start bg-blue-500/10 text-blue-300 border border-blue-500/20 hover:bg-blue-500/20 cursor-pointer"
           }
         >
           All
@@ -49,14 +56,15 @@ export function TagFilter({
         <button
           key={tag.id}
           type="button"
+          className="w-full text-left"
           onClick={() => handleTagClick(tag.id)}
         >
           <Badge
             variant={activeTagId === tag.id ? "default" : "secondary"}
             className={
               activeTagId === tag.id
-                ? "bg-blue-600 text-white hover:bg-blue-500 border border-blue-500 shadow-sm shadow-blue-500/30 cursor-pointer"
-                : "bg-blue-500/10 text-blue-300 border border-blue-500/20 hover:bg-blue-500/20 cursor-pointer"
+                ? "w-full justify-start bg-blue-600 text-white hover:bg-blue-500 border border-blue-500 shadow-sm shadow-blue-500/30 cursor-pointer"
+                : "w-full justify-start bg-blue-500/10 text-blue-300 border border-blue-500/20 hover:bg-blue-500/20 cursor-pointer"
             }
           >
             {tag.name}

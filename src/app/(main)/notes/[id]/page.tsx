@@ -1,11 +1,11 @@
 import { ArrowLeft, FileText, MessageSquare, Pencil } from "lucide-react";
 import Link from "next/link";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { DeleteNoteButton } from "@/components/ui/custom/delete-note-button";
 import { auth } from "@/lib/auth";
-import { getNoteById } from "@/lib/queries";
+import { getPublicNoteById } from "@/lib/queries";
 import { NoteContent } from "./note-content";
 
 interface NotePageProps {
@@ -14,11 +14,12 @@ interface NotePageProps {
 
 export default async function NotePage({ params }: NotePageProps) {
   const session = await auth();
-  if (!session?.user) redirect("/login");
-
   const { id } = await params;
-  const note = await getNoteById(id);
+
+  const note = await getPublicNoteById(id);
   if (!note) notFound();
+
+  const isOwner = session?.user?.id === note.userId;
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-3xl">
@@ -43,19 +44,21 @@ export default async function NotePage({ params }: NotePageProps) {
 
       <div className="flex items-start justify-between mb-4">
         <h1 className="text-3xl font-bold text-slate-100">{note.title}</h1>
-        <div className="flex gap-2 flex-shrink-0 ml-4">
-          <Button
-            asChild
-            variant="outline"
-            size="sm"
-            className="border-white/10 text-slate-300 bg-white/5 backdrop-blur-sm hover:bg-white/10"
-          >
-            <Link href={`/notes/${id}/edit`}>
-              <Pencil className="mr-1 h-4 w-4" /> Edit
-            </Link>
-          </Button>
-          <DeleteNoteButton noteId={id} />
-        </div>
+        {isOwner && (
+          <div className="flex gap-2 flex-shrink-0 ml-4">
+            <Button
+              asChild
+              variant="outline"
+              size="sm"
+              className="border-white/10 text-slate-300 bg-white/5 backdrop-blur-sm hover:bg-white/10"
+            >
+              <Link href={`/notes/${id}/edit`}>
+                <Pencil className="mr-1 h-4 w-4" /> Edit
+              </Link>
+            </Button>
+            <DeleteNoteButton noteId={id} />
+          </div>
+        )}
       </div>
 
       {note.tags.length > 0 && (
