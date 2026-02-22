@@ -9,6 +9,23 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+function stripMarkdown(raw: string): string {
+  return raw
+    .replace(/```[\s\S]*?```/g, "") // fenced code blocks
+    .replace(/`([^`]+)`/g, "$1") // inline code
+    .replace(/^#{1,6}\s+/gm, "") // headings
+    .replace(/\*\*(.+?)\*\*/g, "$1") // bold
+    .replace(/\*(.+?)\*/g, "$1") // italic
+    .replace(/!\[.*?\]\(.*?\)/g, "") // images
+    .replace(/\[(.+?)\]\(.*?\)/g, "$1") // links
+    .replace(/^[-*+]\s+/gm, "") // unordered list markers
+    .replace(/^\d+\.\s+/gm, "") // ordered list markers
+    .replace(/^>\s+/gm, "") // blockquotes
+    .replace(/[-]{3,}/g, "") // horizontal rules
+    .replace(/\n+/g, " ") // collapse newlines
+    .trim();
+}
+
 interface Note {
   id: string;
   title: string;
@@ -50,7 +67,7 @@ export function NotesList({
               </CardHeader>
               <CardContent className="pb-2">
                 <p className="text-sm text-slate-400 line-clamp-3">
-                  {note.content || "No content"}
+                  {note.content ? stripMarkdown(note.content) : "No content"}
                 </p>
               </CardContent>
               <CardFooter className="flex flex-col items-start gap-2">
