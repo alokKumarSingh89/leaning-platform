@@ -76,7 +76,12 @@ export async function updateNote(
 
   await db
     .update(notes)
-    .set({ title: title.trim(), content, type: noteType, updatedAt: new Date() })
+    .set({
+      title: title.trim(),
+      content,
+      type: noteType,
+      updatedAt: new Date(),
+    })
     .where(eq(notes.id, noteId));
 
   await db.delete(noteTags).where(eq(noteTags.noteId, noteId));
