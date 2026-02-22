@@ -121,6 +121,32 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground antialiased;
+    background: linear-gradient(135deg, #020617 0%, #0f172a 40%, #1e1b4b 100%);
+    min-height: 100vh;
+  }
+}
+
+@layer utilities {
+  .glow-blue {
+    box-shadow:
+      0 0 20px rgba(59, 130, 246, 0.15),
+      0 0 40px rgba(59, 130, 246, 0.05);
+  }
+  .glow-blue-strong {
+    box-shadow:
+      0 0 30px rgba(59, 130, 246, 0.25),
+      0 0 60px rgba(59, 130, 246, 0.1);
+  }
+  .glow-emerald {
+    box-shadow:
+      0 0 20px rgba(16, 185, 129, 0.15),
+      0 0 40px rgba(16, 185, 129, 0.05);
+  }
+  .glass-card {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0.75rem;
   }
 }

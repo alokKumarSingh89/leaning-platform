@@ -42,7 +42,7 @@ function CodeRenderer({ className, children, ...props }: CodeProps) {
   return (
     <code
       className={cn(
-        "rounded bg-slate-800 px-1 py-0.5 text-sm text-blue-300 font-mono",
+        "rounded bg-blue-500/10 border border-blue-500/10 px-1 py-0.5 text-sm text-blue-300 font-mono",
         className,
       )}
       {...props}
@@ -58,7 +58,7 @@ const markdownComponents: Components = {
 
 export function MarkdownContent({ content }: { content: string }) {
   return (
-    <div className="prose prose-invert prose-sm max-w-none prose-headings:text-slate-100 prose-p:text-slate-300 prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline prose-strong:text-slate-100 prose-code:text-blue-300 prose-pre:bg-slate-900 prose-pre:border prose-pre:border-white/10 prose-pre:p-4 prose-li:text-slate-300 prose-hr:border-white/10">
+    <div className="prose prose-invert prose-sm max-w-none prose-headings:text-slate-100 prose-p:text-slate-300 prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline prose-strong:text-slate-100 prose-code:text-blue-300 prose-pre:bg-white/5 prose-pre:backdrop-blur-sm prose-pre:border prose-pre:border-white/10 prose-pre:p-4 prose-li:text-slate-300 prose-hr:border-white/10">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={markdownComponents}

@@ -36,10 +36,10 @@ export default function Header({
     : "DV";
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/5 bg-slate-950/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-white/5 backdrop-blur-xl">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600/10 border border-blue-500/20 group-hover:border-blue-500/50 transition-all shadow-[0_0_15px_rgba(59,130,246,0.1)]">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600/10 border border-blue-500/20 group-hover:border-blue-500/50 transition-all glow-blue group-hover:glow-blue-strong">
             <Cpu className="h-5 w-5 text-blue-400" />
           </div>
           <span className="text-lg font-bold tracking-tight text-slate-100">
@@ -78,7 +78,7 @@ export default function Header({
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant="ghost"
-                    className="relative h-9 w-9 rounded-full border border-white/10 p-0"
+                    className="relative h-9 w-9 rounded-full border border-white/10 p-0 bg-white/5 hover:border-white/20 transition-colors"
                   >
                     <Avatar className="h-8 w-8">
                       <AvatarImage src={user?.image || ""} />
@@ -87,7 +87,7 @@ export default function Header({
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
-                  className="w-56 bg-slate-900 border-white/10 text-slate-300"
+                  className="w-56 bg-slate-950/90 backdrop-blur-xl border-white/10 text-slate-300"
                   align="end"
                 >
                   <DropdownMenuLabel>

@@ -1,4 +1,4 @@
-import { ArrowLeft, Pencil } from "lucide-react";
+import { ArrowLeft, FileText, MessageSquare, Pencil } from "lucide-react";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
@@ -25,11 +25,21 @@ export default async function NotePage({ params }: NotePageProps) {
       <div className="mb-6">
         <Link
           href="/notes"
-          className="text-sm text-slate-400 hover:text-slate-200 inline-flex items-center gap-1"
+          className="text-sm text-slate-400 hover:text-slate-100 transition-colors inline-flex items-center gap-1"
         >
           <ArrowLeft className="h-3 w-3" /> Back to notes
         </Link>
       </div>
+
+      {note.type === "interview" ? (
+        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 mb-4">
+          <MessageSquare className="h-3 w-3" /> Interview Question
+        </span>
+      ) : (
+        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-500/10 text-blue-300 border border-blue-500/20 mb-4">
+          <FileText className="h-3 w-3" /> Note
+        </span>
+      )}
 
       <div className="flex items-start justify-between mb-4">
         <h1 className="text-3xl font-bold text-slate-100">{note.title}</h1>
@@ -38,7 +48,7 @@ export default async function NotePage({ params }: NotePageProps) {
             asChild
             variant="outline"
             size="sm"
-            className="border-white/10 text-slate-300 hover:bg-white/5"
+            className="border-white/10 text-slate-300 bg-white/5 backdrop-blur-sm hover:bg-white/10"
           >
             <Link href={`/notes/${id}/edit`}>
               <Pencil className="mr-1 h-4 w-4" /> Edit
@@ -54,7 +64,7 @@ export default async function NotePage({ params }: NotePageProps) {
             <Badge
               key={tag.id}
               variant="secondary"
-              className="bg-blue-600/10 text-blue-400 border-blue-500/20"
+              className="bg-blue-500/10 text-blue-300 border border-blue-500/20"
             >
               {tag.name}
             </Badge>
@@ -66,7 +76,7 @@ export default async function NotePage({ params }: NotePageProps) {
         Updated {note.updatedAt.toLocaleDateString()}
       </p>
 
-      <div className="rounded-lg border border-white/5 bg-slate-900/30 p-6">
+      <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 shadow-xl shadow-black/20">
         <NoteContent content={note.content} />
       </div>
     </div>

@@ -19,10 +19,14 @@ export default function RegisterPage() {
   const [state, action, pending] = useActionState(registerUser, undefined);
 
   return (
-    <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center px-4">
-      <Card className="w-full max-w-md bg-slate-900/50 border-white/10">
+    <div className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center px-4">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-indigo-600/10 blur-3xl"
+      />
+      <Card className="w-full max-w-md bg-white/5 backdrop-blur-md border-white/10 shadow-2xl shadow-black/30 relative z-10">
         <CardHeader className="text-center">
-          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600/10 border border-blue-500/20">
+          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600/10 border border-blue-500/20 glow-blue">
             <Cpu className="h-6 w-6 text-blue-400" />
           </div>
           <CardTitle className="text-2xl text-slate-100">
@@ -42,7 +46,7 @@ export default function RegisterPage() {
                 id="name"
                 name="name"
                 required
-                className="bg-slate-900/50 border-white/10 text-slate-100"
+                className="bg-white/5 border-white/10 backdrop-blur-sm focus-visible:border-blue-500/50 focus-visible:ring-blue-500/20 text-slate-100"
                 placeholder="Your name"
               />
             </div>
@@ -55,7 +59,7 @@ export default function RegisterPage() {
                 name="email"
                 type="email"
                 required
-                className="bg-slate-900/50 border-white/10 text-slate-100"
+                className="bg-white/5 border-white/10 backdrop-blur-sm focus-visible:border-blue-500/50 focus-visible:ring-blue-500/20 text-slate-100"
                 placeholder="you@example.com"
               />
             </div>
@@ -69,7 +73,7 @@ export default function RegisterPage() {
                 type="password"
                 required
                 minLength={6}
-                className="bg-slate-900/50 border-white/10 text-slate-100"
+                className="bg-white/5 border-white/10 backdrop-blur-sm focus-visible:border-blue-500/50 focus-visible:ring-blue-500/20 text-slate-100"
               />
               <p className="text-xs text-slate-500">Minimum 6 characters</p>
             </div>
@@ -79,7 +83,7 @@ export default function RegisterPage() {
             <Button
               type="submit"
               disabled={pending}
-              className="w-full bg-blue-600 hover:bg-blue-500 text-white"
+              className="w-full bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-500/20"
             >
               {pending ? "Creating account..." : "Create account"}
             </Button>

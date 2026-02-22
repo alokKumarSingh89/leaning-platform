@@ -24,7 +24,7 @@ interface HomePageProps {
 
 function EmptySection({ label }: { label: string }) {
   return (
-    <div className="flex flex-col items-center justify-center py-12 text-center rounded-lg border border-white/5 bg-slate-900/30">
+    <div className="flex flex-col items-center justify-center py-12 text-center rounded-xl border border-white/5 bg-white/[0.02] backdrop-blur-sm">
       <p className="text-sm text-slate-500">No {label} yet</p>
     </div>
   );
@@ -39,7 +39,7 @@ function NoteCard({
 }) {
   return (
     <Link href={`/notes/${note.id}`}>
-      <Card className="h-full bg-slate-900/50 border-white/5 hover:border-blue-500/30 transition-colors cursor-pointer">
+      <Card className="h-full glass-card hover:bg-white/[0.07] hover:border-blue-500/20 transition-all duration-200 cursor-pointer">
         <CardHeader className="pb-2">
           <CardTitle className="text-base text-slate-100 line-clamp-1">
             {note.title}
@@ -57,14 +57,14 @@ function NoteCard({
                 <Badge
                   key={tag.id}
                   variant="secondary"
-                  className="bg-blue-600/10 text-blue-400 border-blue-500/20 text-xs"
+                  className="bg-blue-500/10 text-blue-300 border border-blue-500/20 text-xs"
                 >
                   {tag.name}
                 </Badge>
               ))}
             </div>
           )}
-          <p className="text-xs text-slate-600">
+          <p className="text-xs text-slate-500">
             {note.updatedAt.toLocaleDateString()}
           </p>
         </CardFooter>
@@ -92,9 +92,13 @@ export default async function Home({ searchParams }: HomePageProps) {
   return (
     <div className="container mx-auto px-4 py-10 max-w-5xl">
       {/* Hero */}
-      <div className="text-center mb-12">
-        <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600/10 border border-blue-500/20 shadow-[0_0_30px_rgba(59,130,246,0.15)]">
-          <Cpu className="h-7 w-7 text-blue-400" />
+      <div className="relative text-center mb-12">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-72 w-72 rounded-full bg-blue-600/10 blur-3xl"
+        />
+        <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-600/10 border border-blue-500/20 glow-blue-strong">
+          <Cpu className="h-8 w-8 text-blue-400" />
         </div>
         <h1 className="text-4xl font-bold tracking-tight text-slate-100 mb-3">
           Dev<span className="text-blue-500">Vault</span>
@@ -141,7 +145,7 @@ export default async function Home({ searchParams }: HomePageProps) {
 
       {/* Notes section */}
       <section className="mb-12">
-        <h2 className="text-xl font-semibold text-slate-100 mb-4 flex items-center gap-2">
+        <h2 className="text-xl font-semibold text-slate-100 mb-4 flex items-center gap-2 pl-3 border-l-2 border-blue-500/50">
           <BookOpen className="h-5 w-5 text-blue-400" />
           Notes
           <span className="text-sm font-normal text-slate-500">
@@ -165,7 +169,7 @@ export default async function Home({ searchParams }: HomePageProps) {
 
       {/* Interview Questions section */}
       <section>
-        <h2 className="text-xl font-semibold text-slate-100 mb-4 flex items-center gap-2">
+        <h2 className="text-xl font-semibold text-slate-100 mb-4 flex items-center gap-2 pl-3 border-l-2 border-emerald-500/50">
           <MessageSquare className="h-5 w-5 text-green-400" />
           Interview Questions
           <span className="text-sm font-normal text-slate-500">

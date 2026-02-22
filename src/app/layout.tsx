@@ -19,7 +19,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className="dark">
-      <body className="bg-slate-950 text-slate-100 antialiased font-sans">
+      <body className="text-slate-100 antialiased font-sans min-h-screen">
         <Providers>
           <Header isLoggedIn={!!session?.user} user={session?.user} />
           <main>{children}</main>

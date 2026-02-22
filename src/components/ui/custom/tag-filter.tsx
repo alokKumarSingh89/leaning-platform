@@ -38,8 +38,8 @@ export function TagFilter({
           variant={!activeTagId ? "default" : "secondary"}
           className={
             !activeTagId
-              ? "bg-blue-600 text-white hover:bg-blue-500"
-              : "bg-slate-800 text-slate-400 hover:bg-slate-700 border-white/5"
+              ? "bg-blue-600 text-white hover:bg-blue-500 border border-blue-500 shadow-sm shadow-blue-500/30 cursor-pointer"
+              : "bg-blue-500/10 text-blue-300 border border-blue-500/20 hover:bg-blue-500/20 cursor-pointer"
           }
         >
           All
@@ -55,8 +55,8 @@ export function TagFilter({
             variant={activeTagId === tag.id ? "default" : "secondary"}
             className={
               activeTagId === tag.id
-                ? "bg-blue-600 text-white hover:bg-blue-500"
-                : "bg-slate-800 text-slate-400 hover:bg-slate-700 border-white/5"
+                ? "bg-blue-600 text-white hover:bg-blue-500 border border-blue-500 shadow-sm shadow-blue-500/30 cursor-pointer"
+                : "bg-blue-500/10 text-blue-300 border border-blue-500/20 hover:bg-blue-500/20 cursor-pointer"
             }
           >
             {tag.name}

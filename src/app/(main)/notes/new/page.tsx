@@ -12,7 +12,7 @@ export default async function NewNotePage() {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-3xl">
-      <h1 className="text-3xl font-bold text-slate-100 mb-8">
+      <h1 className="text-3xl font-bold text-slate-100 mb-8 tracking-tight">
         Create New Note
       </h1>
       <NoteForm tags={tags} action={createNote} />

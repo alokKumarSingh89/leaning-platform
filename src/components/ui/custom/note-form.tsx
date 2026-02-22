@@ -292,7 +292,7 @@ export function NoteForm({
           required
           defaultValue={initialData?.title}
           placeholder="Note title"
-          className="bg-slate-900/50 border-white/10 text-slate-100 text-lg"
+          className="bg-white/5 backdrop-blur-sm border-white/10 focus-visible:border-blue-500/50 focus-visible:ring-blue-500/20 text-slate-100 text-lg"
         />
       </div>
 
@@ -322,13 +322,13 @@ export function NoteForm({
         </div>
 
         {showPreview ? (
-          <div className="min-h-[400px] rounded-md border border-white/10 bg-slate-900/50 p-4">
+          <div className="min-h-[400px] rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-4">
             <MarkdownContent content={content || "*No content*"} />
           </div>
         ) : (
           <div className="flex flex-col">
             {/* Toolbar */}
-            <div className="flex flex-wrap items-center gap-0.5 px-2 py-1.5 rounded-t-md border border-b-0 border-white/10 bg-slate-900/80">
+            <div className="flex flex-wrap items-center gap-0.5 px-2 py-1.5 rounded-t-md border border-b-0 border-white/10 bg-white/5 backdrop-blur-sm">
               <ToolbarButton onClick={() => handleFormat("bold")} title="Bold">
                 <span className="font-bold text-xs">B</span>
               </ToolbarButton>
@@ -408,7 +408,7 @@ export function NoteForm({
               onChange={(e) => setContent(e.target.value)}
               placeholder="Write your notes in markdown..."
               rows={20}
-              className="rounded-t-none bg-slate-900/50 border-white/10 text-slate-100 font-mono text-sm min-h-[400px]"
+              className="rounded-t-none bg-white/5 border-white/10 focus-visible:border-blue-500/50 focus-visible:ring-blue-500/20 text-slate-100 font-mono text-sm min-h-[400px]"
             />
           </div>
         )}
@@ -425,8 +425,8 @@ export function NoteForm({
             onClick={() => setNoteType("note")}
             className={`px-4 py-1.5 rounded-md text-sm font-medium border transition-colors ${
               noteType === "note"
-                ? "bg-blue-600 text-white border-blue-500"
-                : "bg-slate-900/50 text-slate-400 border-white/10 hover:bg-white/5"
+                ? "bg-blue-600 text-white border-blue-500 shadow-md shadow-blue-500/25"
+                : "bg-white/5 text-slate-400 border-white/10 hover:bg-white/10 backdrop-blur-sm"
             }`}
           >
             Note
@@ -436,8 +436,8 @@ export function NoteForm({
             onClick={() => setNoteType("interview")}
             className={`px-4 py-1.5 rounded-md text-sm font-medium border transition-colors ${
               noteType === "interview"
-                ? "bg-green-700 text-white border-green-600"
-                : "bg-slate-900/50 text-slate-400 border-white/10 hover:bg-white/5"
+                ? "bg-emerald-700 text-white border-emerald-600 shadow-md shadow-emerald-500/25"
+                : "bg-white/5 text-slate-400 border-white/10 hover:bg-white/10 backdrop-blur-sm"
             }`}
           >
             Interview Question
@@ -460,8 +460,8 @@ export function NoteForm({
                 variant={selectedTagIds.has(tag.id) ? "default" : "secondary"}
                 className={
                   selectedTagIds.has(tag.id)
-                    ? "bg-blue-600 text-white hover:bg-blue-500"
-                    : "bg-slate-800 text-slate-400 hover:bg-slate-700 border-white/5"
+                    ? "bg-blue-600 text-white hover:bg-blue-500 shadow-sm shadow-blue-500/30"
+                    : "bg-white/5 text-slate-400 hover:bg-white/10 border-white/10"
                 }
               >
                 {tag.name}
@@ -476,7 +476,7 @@ export function NoteForm({
             value={newTagName}
             onChange={(e) => setNewTagName(e.target.value)}
             placeholder="New tag name"
-            className="bg-slate-900/50 border-white/10 text-slate-100 max-w-[200px]"
+            className="bg-white/5 backdrop-blur-sm border-white/10 focus-visible:border-blue-500/50 focus-visible:ring-blue-500/20 text-slate-100 max-w-[200px]"
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 e.preventDefault();
@@ -489,7 +489,7 @@ export function NoteForm({
             variant="outline"
             size="sm"
             onClick={handleCreateTag}
-            className="border-white/10 text-slate-300 hover:bg-white/5"
+            className="border-white/10 text-slate-300 bg-white/5 hover:bg-white/10"
           >
             <Plus className="h-4 w-4" />
           </Button>
@@ -506,7 +506,7 @@ export function NoteForm({
       <Button
         type="submit"
         disabled={pending}
-        className="bg-blue-600 hover:bg-blue-500 text-white"
+        className="bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-500/20 glow-blue hover:glow-blue-strong transition-all"
       >
         {pending ? "Saving..." : initialData ? "Update Note" : "Create Note"}
       </Button>

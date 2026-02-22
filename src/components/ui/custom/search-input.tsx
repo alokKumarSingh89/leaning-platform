@@ -25,7 +25,7 @@ export function SearchInput() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search notes..."
-        className="pl-9 bg-slate-900/50 border-white/5 focus-visible:ring-blue-500/20 focus-visible:border-blue-500/50 text-slate-300"
+        className="pl-9 bg-white/5 border-white/10 backdrop-blur-sm focus-visible:ring-blue-500/20 focus-visible:border-blue-500/50 text-slate-300 placeholder:text-slate-500"
       />
       <kbd className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex h-5 select-none items-center gap-1 rounded border border-white/10 bg-white/5 px-1.5 font-mono text-[10px] font-medium text-slate-500">
         <Command className="h-2.5 w-2.5" /> K

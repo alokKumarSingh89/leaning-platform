@@ -27,11 +27,13 @@ export default async function NotesPage({ searchParams }: NotesPageProps) {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-5xl">
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold text-slate-100">My Notes</h1>
+      <div className="flex items-center justify-between mb-8 pb-6 border-b border-white/5">
+        <h1 className="text-3xl font-bold text-slate-100 tracking-tight">
+          My Notes
+        </h1>
         <Button
           asChild
-          className="bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-500/20"
+          className="bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-500/20 glow-blue hover:glow-blue-strong transition-all"
         >
           <Link href="/notes/new">
             <Plus className="mr-2 h-4 w-4" /> New Note

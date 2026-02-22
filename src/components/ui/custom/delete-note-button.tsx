@@ -22,7 +22,7 @@ export function DeleteNoteButton({ noteId }: { noteId: string }) {
           variant="outline"
           size="sm"
           onClick={() => setConfirming(false)}
-          className="border-white/10 text-slate-300"
+          className="border-white/10 text-slate-300 bg-white/5 hover:bg-white/10"
         >
           Cancel
         </Button>
@@ -35,7 +35,7 @@ export function DeleteNoteButton({ noteId }: { noteId: string }) {
       variant="outline"
       size="sm"
       onClick={() => setConfirming(true)}
-      className="border-white/10 text-red-400 hover:bg-red-400/10 hover:text-red-300"
+      className="border-white/10 text-red-400 hover:bg-red-400/10 hover:border-red-400/20 hover:text-red-300 bg-white/5"
     >
       <Trash2 className="mr-1 h-4 w-4" />
       Delete

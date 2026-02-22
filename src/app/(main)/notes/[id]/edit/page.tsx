@@ -28,12 +28,14 @@ export default async function EditNotePage({ params }: EditNotePageProps) {
       <div className="mb-6">
         <Link
           href={`/notes/${id}`}
-          className="text-sm text-slate-400 hover:text-slate-200 inline-flex items-center gap-1"
+          className="text-sm text-slate-400 hover:text-slate-100 transition-colors inline-flex items-center gap-1"
         >
           <ArrowLeft className="h-3 w-3" /> Back to note
         </Link>
       </div>
-      <h1 className="text-3xl font-bold text-slate-100 mb-8">Edit Note</h1>
+      <h1 className="text-3xl font-bold text-slate-100 mb-8 tracking-tight">
+        Edit Note
+      </h1>
       <NoteForm
         tags={tags}
         initialData={{
